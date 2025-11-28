@@ -1,8 +1,8 @@
-# Attendance Face Recognition System
+# 🚀 Attendance Face Recognition System
 
 This project is a real-time attendance system powered by face recognition technology. It allows for employee enrollment and automated attendance tracking (check-in/check-out) using a webcam or via a REST API. The system utilizes **InsightFace** for state-of-the-art face analysis and **ChromaDB** for efficient vector storage and retrieval.
 
-## Features
+## ⭐ Features
 
 - **Real-time Face Recognition:** High-accuracy face detection and recognition using InsightFace and ONNX Runtime.
 - **Employee Enrollment:** Capture face embeddings and store them in a local vector database.
@@ -12,7 +12,7 @@ This project is a real-time attendance system powered by face recognition techno
 - **Vector Database:** Uses ChromaDB to store and manage face embeddings efficiently.
 - **CSV Logging:** Attendance records are saved to `attendance_log.csv`.
 
-## Tech Stack
+## 🧰 Tech Stack
 
 | Library           | Usage in Project                                                                          |
 | ----------------- | ----------------------------------------------------------------------------------------- |
@@ -27,7 +27,7 @@ This project is a real-time attendance system powered by face recognition techno
 | **fastapi**       | Backend framework powering the face recognition and attendance API.                       |
 | **uvicorn**       | ASGI server used to run the FastAPI backend.                                              |
 
-### Installation
+### 📦 Installation
 
 1. **Clone the repository:**
 
@@ -54,9 +54,9 @@ This project is a real-time attendance system powered by face recognition techno
 
    _Note: Ensure you have the necessary build tools for `insightface` and `onnxruntime` if you encounter installation issues._
 
-## Usage
+## 🖥️ Usage
 
-### Command Line Interface (CLI)
+### 1️⃣ Command Line Interface (CLI)
 
 The system can be run directly from the terminal for local usage with a webcam.
 
@@ -79,7 +79,7 @@ python main.py --mode attend
 python main.py
 ```
 
-### API Usage
+### 2️⃣ API Usage
 
 You can also run the system as a REST API server.
 
@@ -102,7 +102,7 @@ uvicorn api:app --reload
   - Form Data: `image` (file), `mode` (default: "checkin")
 - **`GET /employees`**: List all enrolled employees.
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 Attendance_Face_Recognition/
@@ -117,7 +117,7 @@ Attendance_Face_Recognition/
 └── chroma_db/              # Local storage for ChromaDB
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 - **Thresholds:** Face matching thresholds can be adjusted in `face_recognition/matcher.py` or passed during initialization in `main.py`.
 - **Camera:** The default camera index is `0`. Modify `cv2.VideoCapture(0)` in `main.py` if you use an external camera.
