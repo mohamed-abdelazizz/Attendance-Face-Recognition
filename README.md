@@ -27,6 +27,36 @@ This project is a real-time attendance system powered by face recognition techno
 | **fastapi**       | Backend framework powering the face recognition and attendance API.                       |
 | **uvicorn**       | ASGI server used to run the FastAPI backend.                                              |
 
+## 📁 Project structure
+
+```
+Attendance_Face_Recognition/
+├── api.py                      # FastAPI application entry point
+├── main.py                     # CLI entry point for Enrollment and Attendance
+├── requirements.txt            # Python dependencies
+├── attendance_log.csv          # Generated attendance records (CSV written at runtime)
+├── README.md
+├── .gitignore                  # Ignored files for git
+|
+├── database/                   # ChromaDB management logic
+│   └── chroma_manager.py       # Add / fetch embeddings and metadata
+|
+├── enrollment/                 # Enrollment process logic
+│   └── enrollment.py           # EnrollmentManager: capture frames, compute embeddings, save to chroma DB
+|
+├── face_recognition/           # Core face detection and embedding logic
+│   ├── detector.py
+│   ├── embedder.py
+│   └── matcher.py
+|
+├── utils/                      # Utilities (CSV Logging, TTS)
+│   ├── attendance_logger.py
+│   └── tts.py                  #
+|
+└── chroma_db/                  # Local vector store
+   ├── chroma.sqlite3
+```
+
 ### 📦 Installation
 
 1. **Clone the repository:**
@@ -207,36 +237,6 @@ Response example (200):
 
 - Use the interactive Swagger UI (`/docs`) to try endpoints and quickly upload files for testing.
 - If you get a 400 response for an image, try a different photo where the face is clearly visible.
-
-## 📁 Project structure (complete tree)
-
-```
-Attendance_Face_Recognition/
-├── api.py                      # FastAPI application entry point
-├── main.py                     # CLI entry point for Enrollment and Attendance
-├── requirements.txt            # Python dependencies
-├── attendance_log.csv          # Generated attendance records (CSV written at runtime)
-├── README.md
-├── .gitignore                  # Ignored files for git
-|
-├── database/                   # ChromaDB management logic
-│   └── chroma_manager.py       # Add / fetch embeddings and metadata
-|
-├── enrollment/                 # Enrollment process logic
-│   └── enrollment.py           # EnrollmentManager: capture frames, compute embeddings, save to chroma DB
-|
-├── face_recognition/           # Core face detection and embedding logic
-│   ├── detector.py
-│   ├── embedder.py
-│   └── matcher.py
-|
-├── utils/                      # Utilities (CSV Logging, TTS)
-│   ├── attendance_logger.py
-│   └── tts.py                  #
-|
-└── chroma_db/                  # Local vector store
-   ├── chroma.sqlite3
-```
 
 ## ⚙️ Configuration
 

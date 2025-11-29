@@ -15,7 +15,8 @@ class AttendanceLogger:
         if not os.path.exists(self.csv_path):
             with open(self.csv_path, mode="w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["timestamp", "employee_id", "employee_name", "mode"])
+                writer.writerow(
+                    ["timestamp", "employee_id", "employee_name", "mode"])
 
     def log(
         self,
