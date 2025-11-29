@@ -1,32 +1,29 @@
+import pyttsx3
 import queue
 import threading
 
-import pyttsx3
-
 
 class TextToSpeech:
-    """Thread-safe, non-blocking wrapper around pyttsx3.
-
-    Uses a single background worker thread and a queue to avoid
-    'run loop already started' errors from multiple concurrent runAndWait() calls.
-    """
+    """Async text-to-speech using pyttsx3 with a background thread."""
 
     def __init__(self) -> None:
+        # Initialize pyttsx3 engine
         self.engine = pyttsx3.init()
-        self._queue: "queue.Queue[str]" = queue.Queue()
-        self._worker = threading.Thread(target=self._run, daemon=True)
-        self._worker.start()
+        # Queue to store texts that need to be spoken
+        self._queue = queue.Queue()
+        # Start a background thread to speak texts
+        threading.Thread(target=self._worker, daemon=True).start()
 
-    def _run(self) -> None:
+    def _worker(self) -> None:
+        """Background thread: read texts from queue and speak them one by one."""
         while True:
-            text = self._queue.get()
-            if text is None:
+            text = self._queue.get()  # wait for a text to speak
+            if text is None:  # special signal to stop thread (not used here)
                 break
             self.engine.say(text)
-            self.engine.runAndWait()
+            self.engine.runAndWait()  # block here until speaking finishes
 
     def speak_async(self, text: str) -> None:
-        """Enqueue text to be spoken by the background worker."""
-        if not text:
-            return
-        self._queue.put(text)
+        """Add text to the queue to speak in background."""
+        if text:  # ignore empty text
+            self._queue.put(text)

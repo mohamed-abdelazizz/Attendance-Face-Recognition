@@ -54,7 +54,7 @@ Attendance_Face_Recognition/
 │   └── tts.py                  #
 |
 └── chroma_db/                  # Local vector store
-   ├── chroma.sqlite3
+|   ├── chroma.sqlite3
 ```
 
 ### 📦 Installation

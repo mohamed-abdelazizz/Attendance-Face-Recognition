@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
-
+from typing import Optional, Dict, List
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -13,9 +12,9 @@ class MatchResult:
 
 
 class FaceMatcher:
-    """Performs cosine similarity search over embeddings with a configurable threshold."""
+    """Matches a face embedding against stored embeddings using cosine similarity."""
 
-    def __init__(self, threshold: float = 0.6) -> None:
+    def __init__(self, threshold: float = 0.5) -> None:
         self.threshold = threshold
 
     def find_best_match(
@@ -24,28 +23,32 @@ class FaceMatcher:
         embeddings: List[np.ndarray],
         metadatas: List[Dict[str, str]],
     ) -> Optional[MatchResult]:
-        """Return best matching employee or None if below threshold.
-
-        `embeddings` is a list of 1D numpy arrays.
-        `metadatas` is a list of dicts containing at least `employee_id` and `employee_name`.
+        """
+        Compare query embedding with a list of stored embeddings.
+        Return the best match OR None if no match passes the threshold.
         """
         if not embeddings:
             return None
 
-        # Stack into matrix for cosine similarity computation
+        # Convert list of embeddings into matrix
+        # nums_faces × emb_dim (100 , 512)
         emb_matrix = np.stack(embeddings, axis=0)
-        query = query_embedding.reshape(1, -1)
-        sims = cosine_similarity(query, emb_matrix)[0]
 
-        best_idx = int(np.argmax(sims))
-        best_sim = float(sims[best_idx])
+        # Compute cosine similarity
+        cos_sim = cosine_similarity(
+            query_embedding.reshape(1, -1), emb_matrix)[0]
+
+        # Find best match
+        best_idx = int(np.argmax(cos_sim))
+        best_sim = float(cos_sim[best_idx])
 
         if best_sim < self.threshold:
             return None
 
-        meta = metadatas[best_idx]
+        metadata = metadatas[best_idx]
+
         return MatchResult(
-            employee_id=meta.get("employee_id", ""),
-            employee_name=meta.get("employee_name", ""),
+            employee_id=metadata.get("employee_id", ""),
+            employee_name=metadata.get("employee_name", ""),
             similarity=best_sim,
         )
