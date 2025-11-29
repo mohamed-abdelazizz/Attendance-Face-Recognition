@@ -161,19 +161,6 @@ Example success response:
 { "stored_samples": 5 }
 ```
 
-Example: curl (recommended)
-
-```bash
-curl -X POST "http://127.0.0.1:8000/enroll" \
-   -F "employee_id=20210325" \
-   -F "employee_name=Mohamed Abd El-aziz" \
-   -F "image1=@/path/to/image1.jpg" \
-   -F "image2=@/path/to/image2.jpg" \
-   -F "image3=@/path/to/image3.jpg" \
-   -F "image4=@/path/to/image4.jpg" \
-   -F "image5=@/path/to/image5.jpg"
-```
-
 Common error responses
 
 - 400 Bad Request — missing/invalid image or failed embedding for a particular file. Example detail: "Failed to compute embedding for image 3: No face detected"
@@ -210,14 +197,6 @@ If no match is found (face unknown):
   "mode": "checkin",
   "recognized": false
 }
-```
-
-Example (curl):
-
-```bash
-curl -X POST "http://127.0.0.1:8000/recognize" \
-   -F "image=@/path/to/photo.jpg" \
-   -F "mode=checkin"
 ```
 
 ## GET /employees
