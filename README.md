@@ -7,8 +7,8 @@ This project is a real-time attendance system powered by face recognition techno
 - **Real-time Face Recognition:** High-accuracy face detection and recognition using InsightFace and ONNX Runtime.
 - **Employee Enrollment:** Capture face embeddings and store them in a chroma vector database.
 - **Attendance Tracking:** Automatically log check-in and check-out times.
-- **Text-to-Speech (TTS):** Audio feedback greeting employees by name or alerting for unknown faces.
 - **Vector Database:** Uses ChromaDB to store and manage face embeddings efficiently.
+- **Text-to-Speech (TTS):** Audio feedback greeting employees by name or alerting for unknown faces.
 - **CSV Logging:** Attendance records are saved to `attendance_log.csv`.
 - **REST API:** FastAPI-based interface for remote enrollment and recognition.
 
